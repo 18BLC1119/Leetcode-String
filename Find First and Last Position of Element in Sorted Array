@@ -1,0 +1,92 @@
+34. Find First and Last Position of Element in Sorted Array
+Medium
+
+7008
+
+232
+
+Add to List
+
+Share
+Given an array of integers nums sorted in ascending order, find the starting and ending position of a given target value.
+
+If target is not found in the array, return [-1, -1].
+
+You must write an algorithm with O(log n) runtime complexity.
+
+ 
+
+Example 1:
+
+Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+Example 2:
+
+Input: nums = [5,7,7,8,8,10], target = 6
+Output: [-1,-1]
+Example 3:
+
+Input: nums = [], target = 0
+Output: [-1,-1]
+ 
+
+Constraints:
+
+0 <= nums.length <= 105
+-109 <= nums[i] <= 109
+nums is a non-decreasing array.
+-109 <= target <= 109
+
+========================================================================================================================================
+class Solution {
+public:
+    int left(vector<int>& nums,int target)
+    {
+        int left1=0;
+        int right1=nums.size()-1;
+        int index=-1;
+        while(left1<=right1)
+        {
+            int mid=left1+(right1-left1)/2;
+            if(nums[mid]<target)
+            {
+                left1++;
+            }
+            else{
+                right1--;
+            }
+            if(nums[mid]==target)
+            {
+                index=mid;
+            }
+        }
+        return index;
+    }
+    int right(vector<int>& nums,int target)
+    {
+        int left1=0;
+        int right1=nums.size()-1;
+        int index=-1;
+        while(left1<=right1)
+        {
+            int mid=left1+(right1-left1)/2;
+            if(nums[mid]<=target)
+            {
+                left1++;
+            }
+            else{
+                right1--;
+            }
+            if(nums[mid]==target)
+            {
+                index=mid;
+            }
+        }
+        return index;
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int a=left(nums,target);
+        int b=right(nums,target);
+        return {a,b};
+    }
+};
